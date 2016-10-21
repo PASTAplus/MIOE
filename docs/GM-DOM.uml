@@ -1,0 +1,11 @@
+@startuml
+
+gmDOM *--> access
+gmDOM *--> title
+gmDOM *--> abstract
+gmDOM *--> creator
+gmDOM *--> contact
+gmDOM *--> methods
+gmDOM *--> dataTable
+
+@enduml

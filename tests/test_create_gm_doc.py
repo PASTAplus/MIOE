@@ -20,6 +20,7 @@ logging.basicConfig(format='%(asctime)s %(levelname)s (%(name)s): %(message)s',
 logging.getLogger('').setLevel(logging.WARN)
 logger = logging.getLogger('test_create_gm_doc')
 
+from .context import gm_dom
 
 class MyTestCase(unittest.TestCase):
     def setUp(self):

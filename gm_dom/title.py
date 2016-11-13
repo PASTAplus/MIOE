@@ -25,7 +25,7 @@ import json
 class Title(object):
 
     def __init__(self, title=None):
-        self.title = json.load(j )
+        self.title = title
 
 def main():
     return 0

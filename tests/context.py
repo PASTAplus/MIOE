@@ -23,7 +23,8 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
 
-import gm_dom
+from gm_dom import gm_dom
+from gm_dom import title
 
 def main():
     return 0

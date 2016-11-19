@@ -43,6 +43,10 @@ class Title(object):
     def to_json(self):
         return json.dumps({'title': self.title})
 
+    
+    def from_json(self, title=None):
+        return json.loads(title)
+
 
 def main():
     return 0

@@ -28,6 +28,7 @@ from .context import title
 class TestTitle(unittest.TestCase):
     test_title = "This is a test title!"
     json_title = json.dumps({'title': test_title})
+    py_title = json.loads(json_title)
 
     def setUp(self):
         self.title = title.Title(TestTitle.test_title)
@@ -36,14 +37,23 @@ class TestTitle(unittest.TestCase):
         pass
 
     def test_default_title(self):
-        self.assertEquals(TestTitle.test_title, self.title.get_title(),
-                          msg='{test}: expected title "{title}", but received "{error}"'.format(
-                              test='test_title', title=TestTitle.test_title,
-                              error=self.title.get_title()))
+        test_title = self.title.get_title()
+        msg = '{test}: expected title "{title}", but received "{error}"'.format(
+            test='test_title', title=TestTitle.test_title,
+            error=test_title)
+        self.assertEquals(TestTitle.test_title, test_title, msg)
 
     def test_to_json(self):
         json_title = self.title.to_json()
-        self.assertEquals(TestTitle.json_title, json_title)
+        msg = '{test}: expected json "{json}", but received "{error}"'.format(
+            test='test_to_json', json=TestTitle.json_title, error=json_title)
+        self.assertEquals(TestTitle.json_title, json_title, msg)
+
+    def test_from_json(self):
+        py_title = self.title.from_json(TestTitle.json_title)
+        msg = '{test}: expected object "{py}", but received "{error}"'.format(
+            test='test_from_json', py=TestTitle.json_title, error=py_title)
+        self.assertEqual(TestTitle.py_title, py_title, msg)
 
 
 if __name__ == '__main__':

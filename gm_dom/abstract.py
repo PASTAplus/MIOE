@@ -41,7 +41,7 @@ class Abstract(object):
         return json.dumps({'abstract': self.abstract})
 
     @staticmethod
-    def from_json(abstract=None):
+    def from_json(abstract='null'):
         return json.loads(abstract)
 
 

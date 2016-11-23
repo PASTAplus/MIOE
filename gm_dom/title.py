@@ -27,24 +27,20 @@ class Title(object):
     def __init__(self, title=None):
         self.title = title
 
-
     def get_title(self):
         return self.title
-
 
     def set_title(self, title=None):
         self.title = title
 
-
     def trim_title(self):
         return self.title.strip()
-
 
     def to_json(self):
         return json.dumps({'title': self.title})
 
-    
-    def from_json(self, title=None):
+    @staticmethod
+    def from_json(title=None):
         return json.loads(title)
 
 

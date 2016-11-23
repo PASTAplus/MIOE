@@ -40,7 +40,7 @@ class Title(object):
         return json.dumps({'title': self.title})
 
     @staticmethod
-    def from_json(title=None):
+    def from_json(title='null'):
         return json.loads(title)
 
 

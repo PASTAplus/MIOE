@@ -27,27 +27,24 @@ class Rule(object):
         self.principal = principal
         self.permission = permission
 
+    def to_json(self):
+        return json.dumps({'principal': self.principal,
+                           'permission': self.permission})
+
+    @staticmethod
+    def from_json(rule='null'):
+        return json.loads(rule)
+
 
 class Access(object):
 
-    def __init__(self, rule_type='allow', principal='public', permission='read'):
-        """Access object constructor: requires at least one rule.
-
-        :param (str) rule_type:
-        :param (str) principal:
-        :param (str) permission:
-        """
+    def __init__(self):
         self.deny_rules = []
         self.allow_rules = []
-        self.rules = 1
+        self.rules = 0
 
-        if rule_type == 'allow':
-            self.add_allow_rule(principal, permission)
-        elif rule_type == 'deny':
-            self.add_deny_rule(principal, permission)
-        else:
-            raise TypeError('Expected either "allow" or "deny" rule type, ' \
-                            'but received {rule_type}'.format(rule_type=rule_type))
+    def rule_count(self):
+        return  self.rules
 
     def add_allow_rule(self, principal='public', permission='read'):
         self.allow_rules.append(Rule(principal, permission))
@@ -62,8 +59,6 @@ class Access(object):
         try:
             self.allow_rules.remove(rule)
             self.rules -= 1
-            if self.rules == 0:
-                raise ValueError('Rule count cannot be zero!')
         except ValueError:
             logger.warn('Attempting to remove allow rule that does not exist')
 
@@ -72,10 +67,13 @@ class Access(object):
         try:
             self.deny_rules.remove(rule)
             self.rules -= 1
-            if self.rules == 0:
-                raise ValueError('Rule count cannot be zero!')
         except ValueError:
             logger.warn('Attempting to remove deny rule that does not exist')
+
+    def to_json(self):
+        # TODO: decide how to handle an empty access element
+        pass
+
 
 
 

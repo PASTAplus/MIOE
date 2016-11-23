@@ -39,20 +39,44 @@ class Access(object):
         """
         self.deny_rules = []
         self.allow_rules = []
+        self.rules = 1
 
         if rule_type == 'allow':
-            self.allow_rules.append(Rule(principal, permission))
+            self.add_allow_rule(principal, permission)
         elif rule_type == 'deny':
-            self.deny_rules.append(Rule(principal, permission))
+            self.add_deny_rule(principal, permission)
         else:
             raise TypeError('Expected either "allow" or "deny" rule type, ' \
                             'but received {rule_type}'.format(rule_type=rule_type))
 
     def add_allow_rule(self, principal='public', permission='read'):
         self.allow_rules.append(Rule(principal, permission))
+        self.rules += 1
 
     def add_deny_rule(self, principal='public', permission='read'):
         self.deny_rules.append(Rule(principal, permission))
+        self.rules += 1
+
+    def remove_allow_rule(self, principal='public', permission='read'):
+        rule = Rule(principal, permission)
+        try:
+            self.allow_rules.remove(rule)
+            self.rules -= 1
+            if self.rules == 0:
+                raise ValueError('Rule count cannot be zero!')
+        except ValueError:
+            logger.warn('Attempting to remove allow rule that does not exist')
+
+    def remove_deny_rule(self, principal='public', permission='read'):
+        rule = Rule(principal, permission)
+        try:
+            self.deny_rules.remove(rule)
+            self.rules -= 1
+            if self.rules == 0:
+                raise ValueError('Rule count cannot be zero!')
+        except ValueError:
+            logger.warn('Attempting to remove deny rule that does not exist')
+
 
 
 def main():

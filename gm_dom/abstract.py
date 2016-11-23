@@ -20,6 +20,31 @@ logging.getLogger('').setLevel(logging.WARN)
 logger = logging.getLogger('abstract')
 
 
+import json
+
+
+class Abstract(object):
+
+    def __init__(self, abstract=None):
+        self.abstract = abstract
+
+    def get_abstract(self):
+        return self.abstract
+
+    def set_abstract(self, abstract=None):
+        self.abstract = abstract
+
+    def trim_abstract(self):
+        return self.abstract.strip()
+
+    def to_json(self):
+        return json.dumps({'abstract': self.abstract})
+
+    @staticmethod
+    def from_json(abstract=None):
+        return json.loads(abstract)
+
+
 def main():
     return 0
 

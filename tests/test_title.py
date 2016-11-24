@@ -39,7 +39,7 @@ class TestTitle(unittest.TestCase):
     def test_default_title(self):
         test_title = self.title.get_title()
         msg = '{test}: expected title "{title}", but received "{error}"'.format(
-            test='test_title', title=TestTitle.test_title,
+            test='test_default_title', title=TestTitle.test_title,
             error=test_title)
         self.assertEquals(TestTitle.test_title, test_title, msg)
 

@@ -25,6 +25,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 from gm_dom import dom
 from gm_dom import title
+from gm_dom import access
 
 def main():
     return 0

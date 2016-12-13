@@ -20,6 +20,10 @@ logging.getLogger('').setLevel(logging.WARN)
 logger = logging.getLogger('dataset')
 
 
+class Dataset():
+    pass
+
+
 def main():
     return 0
 

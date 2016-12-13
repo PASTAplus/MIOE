@@ -20,14 +20,15 @@ logging.getLogger('').setLevel(logging.WARN)
 logger = logging.getLogger('gm_dom')
 
 
-from gm_dom import title
+from gm_dom import access
+from gm_dom import dataset
 
 
 class GmDom(object):
 
     def __init__(self):
-        self.title = title.Title()
-
+        self.dataset = dataset.Dataset()
+        self.access = access.Access()
 
 
 def main():
